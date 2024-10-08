@@ -11,9 +11,6 @@ files = [
     {file = "annotated_types-0.7.0.tar.gz", hash = "sha256:aff07c09a53a08bc8cfccb9c85b05f1aa9a2a6f23728d790723543408344ce89"},
 ]
 
-[package.dependencies]
-typing-extensions = {version = ">=4.0.0", markers = "python_version < \"3.9\""}
-
 [[package]]
 name = "certifi"
 version = "2024.7.4"
@@ -133,6 +130,16 @@ python-versions = ">=3.5"
 files = [
     {file = "idna-3.7-py3-none-any.whl", hash = "sha256:82fee1fc78add43492d3a1898bfa6d8a904cc97d8427f683ed8e798d07761aa0"},
     {file = "idna-3.7.tar.gz", hash = "sha256:028ff3aadf0609c1fd278d8ea3089299412a7a8b9bd005dd08b9f8285bcb5cfc"},
+]
+
+[[package]]
+name = "pedantic"
+version = "2.1.6"
+description = "Some useful Python decorators for cleaner software development."
+optional = false
+python-versions = ">=3.11.0"
+files = [
+    {file = "pedantic-2.1.6-py3-none-any.whl", hash = "sha256:a467a9bf06b36e617cf974d041d77ff90d1a9dfc2779e8dc354fb4ce7872f147"},
 ]
 
 [[package]]
@@ -323,5 +330,5 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.8"
-content-hash = "56d6f0bdaa455d5a13f980a67c3b2a3c37be2c2ab55f7d16afcc38fd98f80309"
+python-versions = ">=3.11"
+content-hash = "f861268c5b0a0fa51dd02e1fe195c6e48363aee0c87f5b7765cc01cd92321a4d"

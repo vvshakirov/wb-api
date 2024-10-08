@@ -1,6 +1,8 @@
 import os
-from wb_api import WBApi
+
 from dotenv import load_dotenv
+
+from wb_api import WBApi
 
 load_dotenv()
 

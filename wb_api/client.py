@@ -1,5 +1,6 @@
 from wb_api.common import Common
 from wb_api.content import Content
+from wb_api.marketplace import Marketplace
 from wb_api.statistics import Statistics
 
 
@@ -19,3 +20,7 @@ class WBApi:
     @property
     def common(self) -> Common:
         return Common(self)
+    
+    @property
+    def marketplace(self) -> Common:
+        return Marketplace(self)
