@@ -7,3 +7,4 @@ dist
 *.egg-info
 publish.ps1
 setup.*
+env

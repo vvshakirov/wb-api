@@ -1,6 +1,6 @@
 from wb_api.client import WBApi
 
-__author__ = "artemdorozhkin"
-__url__ = "https://github.com/artemdorozhkin/wb-api"
-__email__ = "aa.dorozhkin@ya.ru"
-__version__ = "0.3.0"
+__author__ = "vadimshakirov"
+__url__ = "https://github.com/vshakirov/wb-api"
+__email__ = "vvs@quancy.com"
+__version__ = "0.3.1"
