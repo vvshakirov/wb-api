@@ -6,10 +6,18 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional,  Annotated, TypeAlias
 
-from pydantic import BaseModel, Field, constr
+from pydantic import BeforeValidator, BaseModel, Field, constr, field_validator
 
+def _null_str_to_none(v: str | None) -> None:
+    if v is None:
+        return None
+    if v == 'null' or v == '':
+        return None
+    raise ValueError('Value is not empty') # Not str or None, Fall to next type. e.g. Decimal, or a non-empty str
+
+NullStrToNone = Annotated[None, BeforeValidator(_null_str_to_none)]
 
 class Error(BaseModel):
     code: Optional[str] = Field(None, description='Код ошибки')
@@ -167,11 +175,13 @@ class CargoType1(Enum):
 
 
 class Order(BaseModel):
-    address: Optional[Address] = Field(
+    
+
+    address: Optional[Address | NullStrToNone] = Field(
         None,
         description='Детализованный адрес покупателя для доставки (если применимо). Некоторые из полей могут прийти пустыми из-за специфики адреса',
     )
-    scanPrice: Optional[float] = Field(
+    scanPrice: Optional[int | NullStrToNone]  = Field(
         None,
         description='Цена приёмки в копейках. Появляется после фактической приёмки заказа',
         example=1500,
@@ -253,7 +263,8 @@ class Order(BaseModel):
         description='Признак заказа, сделанного на нулевой остаток товара. (<code>false</code> - заказ сделан на товар с ненулевым остатком, <code>true</code> - заказ сделан на товар с остатком равным нулю. Такой заказ можно отменить без штрафа за отмену)',
         example=False,
     )
-
+    class Config:
+        populate_by_name = True
 
 class Address1(BaseModel):
     fullAddress: Optional[str] = Field(
@@ -384,6 +395,8 @@ class OrderNew(BaseModel):
         description='Признак заказа, сделанного на нулевой остаток товара. (<code>false</code> - заказ сделан на товар с ненулевым остатком, <code>true</code> - заказ сделан на товар с остатком равным нулю. Такой заказ можно отменить без штрафа за отмену)',
         example=False,
     )
+    class Config:
+        populate_by_name = True
 
 
 class SupplyOrder(BaseModel):
