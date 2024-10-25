@@ -50,6 +50,7 @@ assert Order.model_validate(test_order)
 
 marketplace = api.marketplace
 # orders = marketplace.get_orders(date_from="2024-06-01", date_to="2024-10-10", limit=1000, next="0")
+marketplace.get_sticker(order_id = 1831710692, type='png', width='58', height='40')
 # orders = marketplace.get_orders_new(date_from="2024-06-01")
 
 # for order in orders:

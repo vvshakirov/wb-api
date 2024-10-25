@@ -139,6 +139,24 @@ class Marketplace(BaseAPI):
         return orders
     
 
+    def get_sticker(self, order_id, type, width, height):
+        data = self.post_data_body(
+            endpoint="orders/stickers",
+            # data = f"{
+            #     "orders": [
+            #         {order_id}
+            #     ]
+            # }",
+            json={
+                "orders": [order_id]
+                },
+            type = type,
+            width = width,
+            height = height,
+            api_vers="v3"
+        )
+        return data
+
     def __get_orders_raw(self, date_from, date_to, limit: int = 1000, next: int = 0, flag: Optional[int] = 0) -> List[Order]:
         data = self.get_data(
             endpoint="orders",

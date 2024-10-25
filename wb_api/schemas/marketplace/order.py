@@ -295,7 +295,7 @@ class DeliveryType1(Enum):
 
 
 class OrderNew(BaseModel):
-    address: Optional[Address1] = Field(
+    address: Optional[Address1 | NullStrToNone] = Field(
         None,
         description='Детализованный адрес покупателя для доставки (если применимо). Некоторые из полей могут прийти пустыми из-за специфики адреса',
     )
@@ -323,7 +323,7 @@ class OrderNew(BaseModel):
         None,
         description='<dl>\n<dt>Тип доставки:</dt>\n<dd>fbs - доставка на склад Wildberries</dd>\n<dd>dbs - доставка силами продавца</dd>\n<dd>edbs - экспресс-доставка силами продавца</dd>\n<dd>wbgo - доставка курьером WB</dd>\n</dl>\n',
     )
-    scanPrice: Optional[float] = Field(
+    scanPrice: Optional[int | NullStrToNone] = Field(
         None,
         description='Цена приёмки в копейках. Появляется после фактической приёмки заказа. Для данного метода всегда будет возвращаться null',
     )
@@ -482,6 +482,30 @@ class SupplyTrbx(BaseModel):
 
 
 class TrbxStickers(BaseModel):
+    barcode: Optional[constr(min_length=1)] = Field(
+        None,
+        description='Закодированное значение этикетки.',
+        example='$WBMP:1:123:1234567',
+    )
+    file: Optional[str] = Field(
+        None,
+        description='Полное представление этикетки в заданном формате. (кодировка base64)',
+        example='U3dhZ2dlciByb2Nrcw==',
+    )
+
+class Sticker(BaseModel):
+    partA: Optional[constr(min_length=7)] = Field(
+        None,
+        description='Первая часть номера 7 цифр',
+        example='2180097',
+    )
+
+    partB: Optional[constr(min_length=4)] = Field(
+        None,
+        description='Вторая часть номера 4 цифры',
+        example='4565',
+    )
+    
     barcode: Optional[constr(min_length=1)] = Field(
         None,
         description='Закодированное значение этикетки.',

@@ -37,6 +37,29 @@ class BaseAPI:
 
         self.__handle_errors(response)
 
+    def post_data_body(
+        self,
+        endpoint: str,
+        json,
+        api_vers: Optional[str] = "v1",
+        **kwargs,
+    ) -> Any:
+        kwargs = {snake_to_camel_case(key): value for key, value in kwargs.items()}
+
+        sandbox = "-sandbox" if self.test_mode else ""
+        url = f"{self.base_url.format(api_vers=api_vers, sandbox=sandbox)}/{endpoint}"
+        response = requests.post(
+            url=url,
+            headers={"Authorization": f"Bearer {self.api_key}"},
+            params=kwargs,
+            json=json
+        )
+        print(response.content.decode())
+        if response.ok:
+            return response.json()
+
+        self.__handle_errors(response)
+
     def __handle_errors(self, response: requests.Response) -> None:
         try:
             reason = response.json().get("detail", "").lower()
