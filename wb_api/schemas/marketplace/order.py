@@ -6,9 +6,10 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional,  Annotated, TypeAlias
+from typing import Annotated, Any, Dict, List, Optional, TypeAlias
 
-from pydantic import BeforeValidator, BaseModel, Field, constr, field_validator
+from pydantic import BaseModel, BeforeValidator, Field, constr, field_validator
+
 
 def _null_str_to_none(v: str | None) -> None:
     if v is None:

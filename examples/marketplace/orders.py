@@ -44,9 +44,67 @@ test_order = {
             "cargoType": 1,
             "isZeroOrder":  "false"
         }
+test_orders = [
+        {
+            "address": "null",
+            "scanPrice": 1500,
+            "comment": "",
+            "deliveryType": "fbs",
+            "supplyId": "WB-GI-93806541",
+            "orderUid": "90440463_7236724654378854961",
+            "article": "BX80715114700K",
+            "colorCode": "",
+            "rid": "7236724654378854961.0.0",
+            "createdAt": "2024-06-21T02:12:15Z",
+            "offices": [
+                "Москва_Запад-Юг"
+            ],
+            "skus": [
+                "2040414722134"
+            ],
+            "id": 1831710692,
+            "warehouseId": 842562,
+            "nmId": 238013110,
+            "chrtId": 374538521,
+            "price": 4147500,
+            "convertedPrice": 4147500,
+            "currencyCode": 643,
+            "convertedCurrencyCode": 643,
+            "cargoType": 1,
+            "isZeroOrder": "false"
+        },
+        {
+            "address": "null",
+            "scanPrice": 1500,
+            "comment": "",
+            "deliveryType": "fbs",
+            "supplyId": "WB-GI-93806541",
+            "orderUid": "1167591_947bde9e2d61413984baea01e44767cb",
+            "article": "BX80715114700K",
+            "colorCode": "",
+            "rid": "2d20912461d640f385b91c1cb67988e1",
+            "createdAt": "2024-06-21T04:32:57Z",
+            "offices": [
+                "Москва_Запад-Юг"
+            ],
+            "skus": [
+                "2040414722134"
+            ],
+            "id": 1831888018,
+            "warehouseId": 842562,
+            "nmId": 238013110,
+            "chrtId": 374538521,
+            "price": 4147500,
+            "convertedPrice": 4147500,
+            "currencyCode": 643,
+            "convertedCurrencyCode": 643,
+            "cargoType": 1,
+            "isZeroOrder": "false"
+        }
+    ]
 
 assert Order.model_validate(test_order)
-
+#assert Orders.model_validate(test_orders)
 
 marketplace = api.marketplace
 # orders = marketplace.get_orders(date_from="2024-06-01", date_to="2024-10-10", limit=1000, next="0")
