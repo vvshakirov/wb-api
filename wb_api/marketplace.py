@@ -1,9 +1,11 @@
 
-from typing import Any, List, Optional
 import json
+from typing import Any, List, Optional
+
 from wb_api.base_api import BaseAPI
-from wb_api.schemas.marketplace import (Order, OrderNew, Orders, OrdersNew)
-from wb_api.utils import get_unix_date, validate_date, get_periods_by_month, date_iso
+from wb_api.schemas.marketplace import Order, OrderNew, Orders, OrdersNew
+from wb_api.utils import (date_iso, get_periods_by_month, get_unix_date,
+                          validate_date)
 
 
 class Marketplace(BaseAPI):
@@ -61,7 +63,7 @@ class Marketplace(BaseAPI):
             flag=flag,
             api_vers="v3"
         )
-        print(json.dumps(data, indent=4, ensure_ascii=False))
+        # print(json.dumps(data, indent=4, ensure_ascii=False))
         return OrdersNew(orders=data["orders"]).orders
     
     def get_orders(self, date_from: str, date_to: str, limit: int, next: int, flag: Optional[int] = 0) -> List[Order]:
@@ -142,11 +144,6 @@ class Marketplace(BaseAPI):
     def get_sticker(self, order_id, type, width, height):
         data = self.post_data_body(
             endpoint="orders/stickers",
-            # data = f"{
-            #     "orders": [
-            #         {order_id}
-            #     ]
-            # }",
             json={
                 "orders": [order_id]
                 },
@@ -167,16 +164,16 @@ class Marketplace(BaseAPI):
             next=next,
             api_vers="v3"
         )
-        print(json.dumps(data, indent=4, ensure_ascii=False))
+        # print(json.dumps(data, indent=4, ensure_ascii=False))
         return data    
 
     def get_orders_pager(self, date_from: str, date_to: str, limit: int = 1000, next: int = 0, flag: Optional[int] = 0) -> List[Order]:
         data = self.__get_orders_raw(date_from=date_from, date_to=date_to, limit=limit, next=next, flag=flag)
         orders = data["orders"]
         if "next" in data:
-             next = data["next"]
-             while next != 0:
+             next_page = data["next"]
+             while next_page != 0:
                 data_add = self.__get_orders_raw(date_from=date_from, date_to=date_to, limit=limit, next=next, flag=flag)    
                 orders = orders + data_add["orders"]
-                next = data_add["next"]
+                next_page = data_add["next"]
         return Orders(orders=orders).orders
