@@ -611,7 +611,10 @@ class Pass(BaseModel):
     id: Optional[int] = Field(None, description='ID пропуска', example=1)
 
 class Orders(BaseModel):
-    orders: List[Order]
+    orders: List[Order] = Field(
+        None, description='Массив заказов.'
+    )
+
 
 class OrdersNew(BaseModel):
     orders: List[OrderNew]
