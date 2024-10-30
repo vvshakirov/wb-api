@@ -8,7 +8,8 @@ from datetime import datetime
 from enum import Enum
 from typing import Annotated, Any, Dict, List, Optional, TypeAlias
 
-from pydantic import BaseModel, BeforeValidator, Field, constr, field_validator
+from pydantic import (BaseModel, BeforeValidator, Field, WithJsonSchema,
+                      constr, field_validator)
 
 
 def _null_str_to_none(v: str | None) -> None:
@@ -611,10 +612,7 @@ class Pass(BaseModel):
     id: Optional[int] = Field(None, description='ID пропуска', example=1)
 
 class Orders(BaseModel):
-    orders: List[Order] = Field(
-        None, description='Массив заказов.'
-    )
-
+    orders: Annotated[List,  WithJsonSchema({'type': 'string'}, mode='serialization')]
 
 class OrdersNew(BaseModel):
     orders: List[OrderNew]
