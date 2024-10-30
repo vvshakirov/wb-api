@@ -171,9 +171,9 @@ class Marketplace(BaseAPI):
         data = self.__get_orders_raw(date_from=date_from, date_to=date_to, limit=limit, next=next, flag=flag)
         orders = data["orders"]
         if "next" in data:
-             next_page = data["next"]
-             while next_page != 0:
+             next = data["next"]
+             while next != 0:
                 data_add = self.__get_orders_raw(date_from=date_from, date_to=date_to, limit=limit, next=next, flag=flag)    
                 orders = orders + data_add["orders"]
-                next_page = data_add["next"]
+                next = data_add["next"]
         return Orders(orders=orders).orders
