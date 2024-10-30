@@ -1,12 +1,10 @@
 from typing import Any, Optional
+
 import requests
-from wb_api.exceptions import (
-    TokenIsMissing,
-    TokenIsMalformed,
-    TokenNotFound,
-    TokenIsNotApplicable,
-    ToManyRequests,
-)
+
+from wb_api.exceptions import (TokenIsMalformed, TokenIsMissing,
+                               TokenIsNotApplicable, TokenNotFound,
+                               ToManyRequests)
 from wb_api.utils import snake_to_camel_case
 
 
@@ -54,7 +52,7 @@ class BaseAPI:
             params=kwargs,
             json=json
         )
-        print(response.content.decode())
+        # print(response.content.decode())
         if response.ok:
             return response.json()
 
