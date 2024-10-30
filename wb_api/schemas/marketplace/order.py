@@ -218,6 +218,7 @@ class Order(BaseModel):
         None,
         description='Дата создания сборочного задания (RFC3339)',
         example='2022-05-04T07:56:29Z',
+        alias='created_at'
     )
     offices: Optional[List[str]] = Field(
         None, description='Список офисов, куда следует привезти товар'
