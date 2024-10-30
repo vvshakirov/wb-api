@@ -612,7 +612,7 @@ class Pass(BaseModel):
     id: Optional[int] = Field(None, description='ID пропуска', example=1)
 
 class Orders(BaseModel):
-    orders: Annotated[List,  WithJsonSchema({'type': 'string'}, mode='serialization')]
+    orders: Annotated[List[Order],  WithJsonSchema({'type': 'string'}, mode='serialization')]
 
 class OrdersNew(BaseModel):
     orders: List[OrderNew]
